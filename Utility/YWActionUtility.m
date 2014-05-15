@@ -29,12 +29,12 @@ static UIAlertView *_alertView = nil;
 {
     //测试时，在这里os和sign里面的os都改成android，因为李丽这边iphone数据还没有配 已经okk
     NSString *timeReq = [NSString stringWithDate:[NSDate date] formater:@"yyyyMMddHHmmss"];
-    NSString *unCodedSign = [NSString stringWithFormat:@"os=iphone&timestamp=%@&appkey=%@",timeReq,KAppKey];
+    NSString *unCodedSign = [NSString stringWithFormat:@"os=android&timestamp=%@&appkey=%@",timeReq,KAppKey];
     DebugLog(@"unCodedSign %@",unCodedSign);
     NSString *sign = [unCodedSign md5HexDigest];
     DebugLog(@"codedSign %@",sign);
     //测试服务器
-    NSString *ceshiUrlString = [NSString stringWithFormat:@"http://192.168.89.18:19121/ApiControl?sign=%@&timestamp=%@&os=iphone&venderId=%@&method=%@&signMethod=md5&format=json&type=mobile&homepageversion=2",sign,timeReq,kVenderId,method];
+    NSString *ceshiUrlString = [NSString stringWithFormat:@"http://192.168.89.18:19121/ApiControl?sign=%@&timestamp=%@&os=android&venderId=%@&method=%@&signMethod=md5&format=json&type=mobile&homepageversion=2",sign,timeReq,kVenderId,method];
     //李丽服务器
 //    NSString *liLiUrlString = [NSString stringWithFormat:@"http://192.168.90.108/mobile-web/ApiControl?sign=%@&timestamp=%@&os=iphone&venderId=%@&method=%@&signMethod=md5&format=json&type=mobile&homepageversion=2",sign,timeReq,kVenderId,method];
 //    //生产服务器 mobi.111.com.cn  ip = 101.226.186.3:8080

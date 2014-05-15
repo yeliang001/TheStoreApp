@@ -25,53 +25,72 @@
         adBg=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, advHeight)];
         adBg.userInteractionEnabled=YES;
         [self.contentView addSubview:adBg];
-        
-        //大图的图片 文字
-        if (!isLeft) {
-            bigImg=[[UIImageView alloc] initWithFrame:CGRectMake(160, 0, advHeight-2, advHeight)];
-            bigImg.backgroundColor = [UIColor yellowColor];
-            bigImg.userInteractionEnabled=YES;
-            [adBg addSubview:bigImg];
-        }
-        else{
-            bigImg=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, advHeight-2, advHeight)];
-            bigImg.backgroundColor = [UIColor yellowColor];
-            bigImg.userInteractionEnabled=YES;
-            [adBg addSubview:bigImg];
-        }
-        
-        
-        UITapGestureRecognizer* tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(promotionTap:)];
-        bigImg.tag=0;
-        [bigImg addGestureRecognizer:tap];
-        
-        promotionImg=[[UIView alloc] initWithFrame:CGRectMake(160, 0, advHeight, advHeight)];
-        
-        UIColor *lineColor=[UIColor colorWithRed:(175.0/255.0) green:(175.0/255.0) blue:(175.0/255.0) alpha:1];
-        
-        [adBg addSubview:promotionImg];
-        UIView* line=[[UIView alloc] initWithFrame:CGRectMake(0, 161, 320, 0.5)];
-        line.backgroundColor=lineColor;
-        [adBg addSubview:line];
-        
-        UIView*verline=[[UIView alloc] initWithFrame:CGRectMake(160, 0, 0.5, 161)];
-        verline.backgroundColor=lineColor;
-        [adBg addSubview:verline];
-        
-        UIImageView *headBigView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 120, 30)];
-        headBigView.backgroundColor = [UIColor colorWithRed:92.0/255.0 green:177.0/255.0 blue:238.0/255.0 alpha:1.0];
-        [promotionImg addSubview:headBigView];
-        
-        UIImageView *headVoView = [[UIImageView alloc] initWithFrame:CGRectMake(120, 5, 20, 30)];
-        headVoView.image = [UIImage imageNamed:@"rightV.png"];
-        [promotionImg addSubview:headVoView];
-        
-        headBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 5, 140, 30)];
-        [headBtn addTarget:self action:@selector(headAction:) forControlEvents:UIControlEventTouchUpInside];
-        [promotionImg addSubview:headBtn];
-        
     }
     return self;
+}
+
+-(void)adjustLeftright{
+    //大图的图片 文字
+    
+    UIColor *lineColor=[UIColor colorWithRed:(175.0/255.0) green:(175.0/255.0) blue:(175.0/255.0) alpha:1];
+    promotionImg=[[UIView alloc] init];
+    [adBg addSubview:promotionImg];
+    
+    UIImageView *headVoView = [[UIImageView alloc] init];
+    [promotionImg addSubview:headVoView];
+    
+    UIImageView *headBigView = [[UIImageView alloc] init];
+    headBigView.backgroundColor = [UIColor colorWithRed:92.0/255.0 green:177.0/255.0 blue:238.0/255.0 alpha:1.0];
+    [promotionImg addSubview:headBigView];
+    
+    headBtn = [[UIButton alloc] init];
+    [headBtn addTarget:self action:@selector(headAction:) forControlEvents:UIControlEventTouchUpInside];
+    [promotionImg addSubview:headBtn];
+    
+    if (isLeft) {
+        bigImg=[[UIImageView alloc] initWithFrame:CGRectMake(160, 0, advHeight-2, advHeight)];
+        bigImg.backgroundColor = [UIColor yellowColor];
+        bigImg.userInteractionEnabled=YES;
+        [adBg addSubview:bigImg];
+        
+        promotionImg.frame = CGRectMake(0, 0, advHeight, advHeight);
+        
+        headVoView.frame = CGRectMake(20, 5, 20, 30);
+        headVoView.image = [UIImage imageNamed:@"leftV.png"];
+        
+        headBigView.frame = CGRectMake(40, 5, 120, 30);
+        
+        headBtn.frame = CGRectMake(20, 5, 140, 30);
+    }
+    else{
+        bigImg=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, advHeight-2, advHeight)];
+        bigImg.backgroundColor = [UIColor yellowColor];
+        bigImg.userInteractionEnabled=YES;
+        [adBg addSubview:bigImg];
+        
+        promotionImg.frame = CGRectMake(160, 0, advHeight, advHeight);
+        
+        headVoView.frame = CGRectMake(120, 5, 20, 30);
+        headVoView.image = [UIImage imageNamed:@"rightV.png"];
+    
+        headBigView.frame = CGRectMake(0, 5, 120, 30);
+        
+        headBtn.frame = CGRectMake(0, 5, 140, 30);
+    }
+    
+    //大图点击事件手势
+    UITapGestureRecognizer* tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(promotionTap:)];
+    bigImg.tag=0;
+    [bigImg addGestureRecognizer:tap];
+    
+    
+    UIView* line=[[UIView alloc] initWithFrame:CGRectMake(0, 161, 320, 0.5)];
+    line.backgroundColor=lineColor;
+    [adBg addSubview:line];
+    
+    UIView*verline=[[UIView alloc] initWithFrame:CGRectMake(160, 0, 0.5, 161)];
+    verline.backgroundColor=lineColor;
+    [adBg addSubview:verline];
 }
 
 -(IBAction)headAction:(id)sender{
@@ -181,7 +200,7 @@
 }
 
 #pragma mark - 加载楼层的各个方法
--(void)loadBtn:(YWAdFloorInfoData *)floor :(int)index{
+-(void)loadBtn:(YWAdFloorInfoData *)floor index:(int)index{
     float btnEndY = 40.0;
     float btnEndX = 10;
     self.tag = index;

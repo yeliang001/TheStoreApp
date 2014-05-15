@@ -34,6 +34,7 @@
 -(void)loadsecondImg:(NSString*)secondImgStr title:(NSString*)title subTitle:(NSString*)subtit;
 -(void)loadBtn:(YWAdFloorInfoData *)floor index:(int)index;
 -(void)loadHeadBtn:(YWAdFloorInfoData *)floor;
+-(void)adjustLeftright;
 @end
 @protocol HomePageModelACellDelegate <NSObject>
 -(void)keywordBtnSelceted:(UIButton*)button type:(int)type;

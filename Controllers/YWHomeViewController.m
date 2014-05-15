@@ -386,7 +386,6 @@
     YWHomePageModelACell* cell=[tableView dequeueReusableCellWithIdentifier:identify];
     if (cell==nil)
     {
-        cell.isLeft = indexPath.row%2;
         cell=[[YWHomePageModelACell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     cell.delegate = self;
@@ -398,6 +397,7 @@
         cell.isLeft = indexPath.row%2;
         cell.tag=indexPath.row;
         
+        [cell adjustLeftright];
         YWSpecialRecommendInfoData *product = floor.bigPage;
         NSString *strPic = product.pic;
         [cell loadBigImg:strPic];
